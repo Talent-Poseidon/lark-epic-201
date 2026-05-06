@@ -60,3 +60,34 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// Master Data Models
+model Kamus {
+  id           String   @id @default(cuid())
+  templateFile String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model StandarJabatan {
+  id        String   @id @default(cuid())
+  standard  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Scenario {
+  id        String   @id @default(cuid())
+  details   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DomainEvent {
+  id            String   @id @default(cuid())
+  eventType     String
+  aggregateType String
+  aggregateId   String
+  payload       String   @db.Text
+  createdAt     DateTime @default(now())
+}

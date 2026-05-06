@@ -58,7 +58,37 @@ async function main() {
     },
   });
 
-  console.log({ originalAdmin, testAdmin, testUser });
+  // Seed Kamus for E2E tests
+  const seedKamus = await prisma.kamus.upsert({
+    where: { id: 'seed-kamus-1' },
+    update: {},
+    create: {
+      id: 'seed-kamus-1',
+      templateFile: 'template-potensi-v1.xlsx',
+    },
+  });
+
+  // Seed StandarJabatan for E2E tests
+  const seedStandar = await prisma.standarJabatan.upsert({
+    where: { id: 'seed-standar-1' },
+    update: {},
+    create: {
+      id: 'seed-standar-1',
+      standard: 'Manager Level 3 Standard',
+    },
+  });
+
+  // Seed Scenario for E2E tests
+  const seedScenario = await prisma.scenario.upsert({
+    where: { id: 'seed-scenario-1' },
+    update: {},
+    create: {
+      id: 'seed-scenario-1',
+      details: 'Assessment Center Scenario A',
+    },
+  });
+
+  console.log({ originalAdmin, testAdmin, testUser, seedKamus, seedStandar, seedScenario });
 }
 
 main()
